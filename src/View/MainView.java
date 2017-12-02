@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 package View;
-
+import Model.DataFitness;
 /**
  *
  * @author MY PC
@@ -211,45 +211,48 @@ public class MainView extends javax.swing.JFrame {
 
     private void btnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSimpanActionPerformed
         // TODO add your handling code here:
-        Model.DataFitness oDF = new Model.DataFitness();
+        DataFitness oDF = new DataFitness();
         int biaya=0;
-        String noKTP = txtNoKTP.getText();
-        String nama = txtNama.getText();
-        String jeniskelamin = "";
+        oDF.setNoKtp(txtNoKTP.getText());
+        oDF.setNama(txtNama.getText());
+      
         if (rbMale.isSelected()) {
-            jeniskelamin = rbMale.getText();
+            oDF.setJeniskelamin(rbMale.getText());
         } else {
             if (rbFemale.isSelected()) {
-                jeniskelamin = rbFemale.getText();
+                oDF.setJeniskelamin(rbMale.getText());
             }
         }
-        String handuk = "";
+        
         if (cbBesar.isSelected()) {
-            handuk = handuk + "" + cbBesar.getText();
+            oDF.setHanduk(cbBesar.getText());
         } else {
             if (cbKecil.isSelected()) {
-                handuk = handuk + "" + cbKecil.getText();
+                oDF.setHanduk(cbKecil.getText());
             }
         }
-        String paket = listPaketFitness.getSelectedValue();
+        
+        oDF.setCabang(cmbCabang.getSelectedItem().toString());
+        oDF.setPaketfitness(listPaketFitness.getSelectedValue());
 
-        switch (paket) {
+        switch (oDF.getPaketfitness()) {
             case "Reguler":
-                biaya = 450000;
+                oDF.setBiayapendaftaran(450000);
                 break;
             case "Mahasiswa":
-                biaya = 300000;
+                oDF.setBiayapendaftaran(300000);
                 break;
             case "Private":
-                biaya = 750000;
+                oDF.setBiayapendaftaran(750000);
                 break;
             case "Premium":
-                biaya = 1000000;
-                break;
+                oDF.setBiayapendaftaran(1000000);
             default:
                 break;
         }
-        txtAreaOutput.setText("PENDAFTARAN ANGGOTA GYM \nNo KTP : " + txtNoKTP.getText() + " \nNama : " + txtNama.getText() + " \nJenis Kelamin : " + jeniskelamin + " \nCabang : " + cmbCabang.getSelectedItem() + " \nJenis Handuk : " + handuk + " \nPaket Fitness : " + paket + "\nBiaya Pendaftaran : Rp. " + biaya + "/bln");
+    
+    
+        txtAreaOutput.setText("PENDAFTARAN ANGGOTA GYM \nNo KTP : " + oDF.getNoKtp() + " \nNama : " + oDF.getNama() + " \nJenis Kelamin : " + oDF.getJeniskelamin() + " \nCabang : " + oDF.getCabang() + " \nJenis Handuk : " + oDF.getHanduk() + " \nPaket Fitness : " + oDF.getPaketfitness() + "\nBiaya Pendaftaran : Rp. " + oDF.getBiayapendaftaran() + "/bln");
     }//GEN-LAST:event_btnSimpanActionPerformed
 
     /**
